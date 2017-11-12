@@ -5,12 +5,13 @@
 ## Login   <foncel_a@epitech.net>
 ## 
 ## Started on  Sun Nov 12 06:36:25 2017 Anaïs Foncel
-## Last update Sun Nov 12 09:17:22 2017 Anaïs Foncel
+## Last update Sun Nov 12 10:08:43 2017 Anaïs Foncel
 ##
 
 NAME		= bomberman
 
 SRCS		= main.cpp	\
+		  Errors.cpp	\
 		  Player.cpp
 
 CXX		= g++
@@ -28,6 +29,7 @@ OBJS_DIR	= bin
 CPPFLAGS	= -I$(LIB_DIR)/include -Iinclude -std=c++11
 CXXFLAGS	= -W -Wall -Werror
 
+LDFLAGS		+= -I./include/
 LDFLAGS		+= -L$(LIB_DIR)/ -lIrrlicht
 LDFLAGS		+= -lGL -lXxf86vm -lXext -lX11 -lXcursor
 LDFLAGS		+=  -L./irrlicht/include/lib ./irrlicht/include/libsfml-audio.so ./irrlicht/include/libsfml-system.so
@@ -49,7 +51,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	@echo "g++ -c -o $@ $^"
 
 $(NAME): $(OBJS_BIN)
-	@$(CXX) $(OBJS_BIN) $(LDFLAGS) -o $(NAME)
+	@$(CXX) $(OBJS_BIN) -o $(NAME) $(LDFLAGS)
 	@echo -e "g++ -o $(NAME)"
 	export LD_LIBRARY_PATH="./irrlicht/include"
 
