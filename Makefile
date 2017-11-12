@@ -5,12 +5,13 @@
 ## Login   <foncel_a@epitech.net>
 ## 
 ## Started on  Sun Nov 12 06:36:25 2017 Anaïs Foncel
-## Last update Sun Nov 12 07:38:31 2017 Anaïs Foncel
+## Last update Sun Nov 12 09:17:22 2017 Anaïs Foncel
 ##
 
 NAME		= bomberman
 
-SRCS		= main.cpp
+SRCS		= main.cpp	\
+		  Player.cpp
 
 CXX		= g++
 
