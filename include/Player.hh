@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:52:20 2017 Anaïs Foncel
-// Last update Sun Nov 12 09:23:37 2017 Anaïs Foncel
+// Last update Sat Nov 18 05:25:18 2017 Anaïs Foncel
 //
 
 #ifndef PLAYER_HH_
@@ -25,11 +25,13 @@ namespace	Bomber
 
     Bomber::v2d		_pos;
 
+    irr::scene::IAnimatedMeshSceneNode	*_node;
+
   public:
     Player(Bomber::v2d const &pos);
     ~Player();
 
-    void		movePlayer();
+    void		movePlayer(bool move, Bomber::e_direction dir, Bomber::v2d initPos);
     void		takeBonus(e_bonus bonus);
 
     void		addSpeed();

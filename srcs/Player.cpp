@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Sun Nov 12 09:25:13 2017 Anaïs Foncel
+// Last update Sat Nov 18 05:23:05 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
@@ -19,6 +19,16 @@ Bomber::Player::Player(Bomber::v2d const &pos)
 Bomber::Player::~Player()
 {
 
+}
+
+void	Bomber::Player::movePlayer(bool move, Bomber::e_direction dir, Bomber::v2d initPos)
+{
+  if (move)
+    {
+      _pos += Bomber::getMovVector(dir);
+      // TODO setPosition
+    }
+  //TODO setRotation
 }
 
 void	Bomber::Player::takeBonus(e_bonus bonus)
