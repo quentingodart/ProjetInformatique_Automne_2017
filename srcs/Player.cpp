@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Sat Nov 18 05:23:05 2017 Anaïs Foncel
+// Last update Sat Nov 18 06:14:40 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
@@ -13,7 +13,7 @@
 Bomber::Player::Player(Bomber::v2d const &pos)
   : _bombs(1), _bombsUse(0), _range(1), _speed(1), _pos(pos)
 {
-
+  irr::scene::IAnimatedMesh	*mesh;
 }
 
 Bomber::Player::~Player()
@@ -26,9 +26,12 @@ void	Bomber::Player::movePlayer(bool move, Bomber::e_direction dir, Bomber::v2d 
   if (move)
     {
       _pos += Bomber::getMovVector(dir);
-      // TODO setPosition
+      this->_node->setPosition(irr::core::vector3df((_pos.X * 100)
+						    + initPos.X - 40, 110,
+						    (_pos.Y * 100)
+						    + initPos.Y + 50));
     }
-  //TODO setRotation
+  this->_node->setRotation(irr::core::vector3df(0, Bomber::getRotValue(dir), 0));
 }
 
 void	Bomber::Player::takeBonus(e_bonus bonus)
@@ -114,4 +117,9 @@ int	Bomber::Player::getY() const
 Bomber::v2d const	&Bomber::Player::getPos() const
 {
   return _pos;
+}
+
+irr::scene::IAnimatedMeshSceneNode	*Bomber::Player::getNode() const
+{
+  return _node;
 }
