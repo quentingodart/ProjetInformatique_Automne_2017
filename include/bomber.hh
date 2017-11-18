@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 09:18:14 2017 Anaïs Foncel
-// Last update Sun Nov 12 09:27:06 2017 Anaïs Foncel
+// Last update Sun Nov 12 11:34:10 2017 Anaïs Foncel
 //
 
 #ifndef BOMBER_HH_
@@ -49,6 +49,9 @@ namespace       Bomber
         D_RIGHT,
         D_LEFT
       };
+
+  v2d		getMovVector(Bomber::e_direction dir);
+  irr::u32	getRotValue(Bomber::e_direction dir);
 }
 
 #endif
