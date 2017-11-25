@@ -32,6 +32,75 @@ void	bomber::Map::addPlayer(bool second)
     _player.push_back(Player(getPlayerPosition(second), this));
 }
 
+void	bomber::Map::choiceBonus(bomber::v2d const & pos)
+{
+  switch (rand() % BONUS_LUCK)
+    {
+    case 3:
+      putBonusSpeed(pos);
+      break;
+    case 4:
+      putBonusRange(pos);
+      break;
+    case 5:
+      putBonusBombe(pos);
+      break;
+    }
+}
+
+int    bomber::Map::checkBombes()
+{
+  for (int i = 0; i < _bombes.size(); i++)
+    {
+      if (_bombes[i]->getTime() + BOMB_TIME < _time)
+        {
+          setInfoPosition(_bombes[i]->getPos(), ' ');
+          _nBomb[i].node->remove();
+	  _player[_nBomb[i].var].setBombsUse(-1);
+          _nBomb.erase(_nBomb.begin() + i);
+          clearBlock(_bombes[i]->getPos(), _bombes[i]->getRange());
+          _bombes.erase(_bombes.begin() + i);
+          i--;
+        }
+    }
+  return (_end);
+}
+
+void	bomber::Map::checkExplosion()
+{
+  for (int i = 0; i < _nExplosion.size(); i++)
+    {
+      if (_nExplosion[i].time + EXP_TIME < _time)
+        {
+          _nExplosion[i].node->remove();
+          _nExplosion.erase(_nExplosion.begin() + i);
+          i--;
+        }
+    }
+}
+
+void	bomber::Map::checkBonus()
+{
+  for (size_t i = 0; i < _nBonus.size(); i++)
+    {
+      bomber::v2d	bPos(_nBonus[i].x, _nBonus[i].y);
+      if (_player[0].getPos() == bPos)
+	{
+	  _nBonus[i].node->remove();
+	  _player[0].giveBonus((e_bonus)_nBonus[i].var);
+	  _nBonus.erase(_nBonus.begin() + i);
+	  i--;
+	}
+      if (_player[1].getPos() == bPos)
+	{
+	  _nBonus[i].node->remove();
+	  _player[1].giveBonus((e_bonus)_nBonus[i].var);
+	  _nBonus.erase(_nBonus.begin() + i);
+	  i--;
+	}
+    }
+}
+
 int	bomber::Map::putGround(const int x, const int z, const int y,
 		       const std::string &texture)
 {
@@ -60,6 +129,124 @@ int	bomber::Map::putGround(const int x, const int z, const int y,
         putGround(x, 0, y, "obj/texture/ground.jpg");
     }
   return (0);
+}
+
+
+int	bomber::Map::putExplosion(bomber::v2d const & pos)
+{
+  irr::scene::IAnimatedMeshSceneNode*	node;
+  irr::scene::IAnimatedMesh*		mesh;
+
+  if (!(mesh = _smgr->getMesh("obj/box.obj")))
+    return 1;
+  else if ((node = _smgr->addAnimatedMeshSceneNode(mesh)))
+    {
+      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      node->setPosition(irr::core::vector3df((pos.X * 100) + _base.X, 1,
+					     (pos.Y * 100) + _base.Y));
+      node->setRotation(irr::core::vector3df(0,0,0));
+      node->setMaterialTexture(0, _driver->getTexture("obj/texture/lavaground.jpg"));
+    }
+  _nExplosion.push_back({node, _time});
+  return (putGround(pos.X, 0, pos.Y, "obj/texture/ground.jpg"));
+}
+
+int	bomber::Map::putBombe(Bombe *b, int player)
+{
+  irr::scene::IAnimatedMeshSceneNode*	node;
+  irr::scene::IAnimatedMesh*		mesh;
+
+  bomber::v2d		pos = b->getPos();
+
+  if (!(mesh = _smgr->getMesh("obj/dinamite.obj")))
+    return 1;
+  else if ((node = _smgr->addAnimatedMeshSceneNode(mesh)))
+    {
+      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      node->setMD2Animation(irr::scene::EMAT_STAND);
+      node->setPosition(irr::core::vector3df((pos.X * 100) + _base.X - 40, 175,
+					     (pos.Y * 100) + _base.Y + 50));
+      node->setScale(irr::core::vector3df(35));
+      node->setRotation(irr::core::vector3df(0,(pos.X * _base.X) + (pos.Y * _base.Y),0));
+      node->setMaterialTexture(0, _driver->getTexture("obj/texture/D.png"));
+    }
+  setInfoPosition(pos, 'b');
+  b->setTime(_time);
+  this->_bombes.push_back(b);
+  this->_nBomb.push_back({node, pos.Y, pos.X, player});
+  return (putGround(pos.X, 0, pos.Y, "obj/texture/ground.jpg"));
+}
+
+int	bomber::Map::putBonusSpeed(bomber::v2d const & pos)
+{
+  irr::scene::IAnimatedMeshSceneNode*	node;
+  irr::scene::IAnimatedMesh*		mesh;
+
+  if (!(mesh = _smgr->getMesh("obj/speed.obj")))
+    return 1;
+  else if ((node = _smgr->addAnimatedMeshSceneNode(mesh)))
+    {
+      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      node->setMD2Animation(irr::scene::EMAT_STAND);
+      node->setPosition(irr::core::vector3df((pos.X * 100) + _base.X - 40, 150,
+					     (pos.Y * 100) + _base.Y + 50));
+      node->setScale(irr::core::vector3df(6));
+      node->setRotation(irr::core::vector3df(0,(pos.Y * _base.X) + (pos.X * _base.Y),0));
+      node->setMaterialTexture(0, _driver->getTexture("obj/texture/bonus.png"));
+      irr::scene::ISceneNodeAnimator* anim=_smgr->createRotationAnimator(irr::core::vector3df(0, 3, 0));
+      node->addAnimator(anim);
+    }
+  setInfoPosition(pos, 'B');
+  this->_nBonus.push_back({node, pos.Y, pos.X, B_SPEED});
+  return (putGround(pos.X, 0, pos.Y, "obj/texture/ground.jpg"));
+}
+
+int	bomber::Map::putBonusRange(bomber::v2d const & pos)
+{
+  irr::scene::IAnimatedMeshSceneNode*	node;
+  irr::scene::IAnimatedMesh*		mesh;
+
+  if (!(mesh = _smgr->getMesh("obj/range.obj")))
+    return 1;
+  else if ((node = _smgr->addAnimatedMeshSceneNode(mesh)))
+    {
+      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      node->setMD2Animation(irr::scene::EMAT_STAND);
+      node->setPosition(irr::core::vector3df((pos.X * 100) + _base.X - 40, 150,
+					     (pos.Y * 100) + _base.Y + 50));
+      node->setScale(irr::core::vector3df(4));
+      node->setRotation(irr::core::vector3df(0,(pos.Y * _base.X) + (pos.X * _base.Y),0));
+      node->setMaterialTexture(0, _driver->getTexture("obj/texture/bonus.png"));
+      irr::scene::ISceneNodeAnimator* anim=_smgr->createRotationAnimator(irr::core::vector3df(0, 3, 0));
+      node->addAnimator(anim);
+    }
+  setInfoPosition(pos, 'B');
+  this->_nBonus.push_back({node, pos.Y, pos.X, B_RANGE});
+  return (putGround(pos.X, 0, pos.Y, "obj/texture/ground.jpg"));
+}
+
+int	bomber::Map::putBonusBombe(bomber::v2d const & pos)
+{
+  irr::scene::IAnimatedMeshSceneNode*	node;
+  irr::scene::IAnimatedMesh*		mesh;
+
+  if (!(mesh = _smgr->getMesh("obj/bombe.obj")))
+    return 1;
+  else if ((node = _smgr->addAnimatedMeshSceneNode(mesh)))
+    {
+      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      node->setMD2Animation(irr::scene::EMAT_STAND);
+      node->setPosition(irr::core::vector3df((pos.X * 100) + _base.X - 40, 150,
+					     (pos.Y * 100) + _base.Y + 50));
+      node->setScale(irr::core::vector3df(20));
+      node->setRotation(irr::core::vector3df(0,(pos.Y * _base.X) + (pos.X * _base.Y),0));
+      node->setMaterialTexture(0, _driver->getTexture("obj/texture/bonus.png"));
+      irr::scene::ISceneNodeAnimator* anim=_smgr->createRotationAnimator(irr::core::vector3df(0, 3, 0));
+      node->addAnimator(anim);
+    }
+  setInfoPosition(pos, 'B');
+  this->_nBonus.push_back({node, pos.Y, pos.X, B_BOMB});
+  return (putGround(pos.X, 0, pos.Y, "obj/texture/ground.jpg"));
 }
 
 int	bomber::Map::charToObj(bomber::v2d const & pos)
