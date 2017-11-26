@@ -1,3 +1,4 @@
+l
 #include "map.hh"
 #include "Player.hh"
 
@@ -288,6 +289,107 @@ int	bomber::Map::initSize()
     return (0);
   return (1);
   // NOTE: on error throw 'Size of map incorect'
+}
+
+void	bomber::Map::removeFromNode(bomber::v2d const & pos, std::vector<t_storNodes> & node)
+{
+  for (int i = 0; i < node.size(); i++)
+    {
+      bomber::v2d	cPos(node[i].x, node[i].y);
+      if (pos == cPos)
+	{
+	  node[i].node->remove();
+	  setInfoPosition(cPos, ' ');
+	  node.erase(node.begin() + i);
+	  i--;
+	  return;
+	}
+    }
+}
+
+void    bomber::Map::clearBlock(bomber::v2d const & pos, int range)
+{
+  putExplosion(pos);
+  removePosition(pos);
+  range -= 1;
+  clearUp(pos + bomber::v2d(1, 0), range);
+  clearDown(pos + bomber::v2d(-1, 0), range);
+  clearLeft(pos + bomber::v2d(0, 1), range);
+  clearRight(pos + bomber::v2d(0, -1), range);
+}
+
+bool	bomber::Map::removePosition(bomber::v2d const & pos)
+{
+  switch (getInfoPosition(pos))
+    {
+    case 'c':
+      removeFromNode(pos, _nCrate);
+      choiceBonus(pos);
+      putExplosion(pos);
+      return false;
+    case 'B':
+      removeFromNode(pos, _nBonus);
+      putExplosion(pos);
+      return true;
+    case 'i':
+      return false;
+    case 'b':
+      for (int i = 0; i < _bombes.size(); i++)
+	{
+	  if (_bombes[i]->getPos() == pos)
+	    _bombes[i]->setTime(0);
+	}
+    default:
+      putExplosion(pos);
+      if (_player[0].getPos() == pos)
+	_end = 1;
+      else if (_player[1].getPos() == pos)
+	_end = 2;
+      break;
+    }
+  return true;
+}
+
+void	bomber::Map::clearUp(bomber::v2d const & pos, int range)
+{
+  if (removePosition(pos) && range > 0)
+    clearUp(pos + bomber::v2d(1, 0), range - 1);
+}
+
+void	bomber::Map::clearDown(bomber::v2d const & pos, int range)
+{
+  if (removePosition(pos) && range > 0)
+    clearDown(pos + bomber::v2d(-1, 0), range - 1);
+}
+
+void	bomber::Map::clearLeft(bomber::v2d const & pos, int range)
+{
+  if (removePosition(pos) && range > 0)
+    clearLeft(pos + bomber::v2d(0, 1), range - 1);
+}
+
+void	bomber::Map::clearRight(bomber::v2d const & pos, int range)
+{
+  if (removePosition(pos) && range > 0)
+      clearRight(pos + bomber::v2d(0, -1), range - 1);
+}
+
+void	bomber::Map::movePlayer(int player, bomber::e_direction dir)
+{
+  bool		canMove = false;
+  char		c = getInfoPosition(_player[player].getPos() + bomber::getMovVector(dir));
+  if (c == ' ' || c == 'B')
+    canMove = true;
+  _player[player].movePlayer(canMove, dir, getBase(), _time);
+}
+
+void	bomber::Map::actionBomb(int player)
+{
+  if ((_player[player].getBombsUse() < _player[player].getBombs()) && getInfoPosition(_player[player].getPos()) != 'b')
+    {
+      putBombe(new Bombe(_player[player].getPos(), _player[player].getRange()), player);
+      _player[player].setBombsUse(1);
+    }
 }
 
 // TODO: Use an enum
