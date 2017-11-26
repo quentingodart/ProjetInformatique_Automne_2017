@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 11:02:01 2017 Anaïs Foncel
-// Last update Sun Nov 12 11:12:58 2017 Anaïs Foncel
+// Last update Sun Nov 26 18:10:00 2017 Anaïs Foncel
 //
 
 #ifndef BOMBE_HH_
@@ -29,11 +29,18 @@ namespace		Bomber
     int		getY() const;
     int		getRange() const;
     Bomber::v2d	getPos() const;
+    irr::u32	getTime() const;
+
+    /*
+    ** Setter
+    */
+    void	setTime(irr::u32 time);
 
   private:
     int		_x;
     int		_y;
     int		_range;
+    irr::u32	_time;
   };
 }
 
