@@ -1,11 +1,12 @@
 #include "Core.hh"
 
-bomber::Core::Core() : _device, _driver(0), _smgr(0)
-{}
-
 bomber::Core::Core()
-{}
+: _device(0), _driver(0), _smgr(0), _run(false), _menu(false), _map()
 
+{
+  //  irr::video::EDT_OPENGL;
+}
+bomber::Core::~Core() {}
 
 void	bomber::Core::init()
 {
@@ -22,12 +23,19 @@ void	bomber::Core::init()
 
 void	bomber::Core::clear()
 {
-  _device->drop()
+  _device->drop();
 }
 
 void	bomber::Core::update()
 {
-  _device->drop();
+  _map.setTime(_device->getTimer()->getTime());
+  if (_map.checkBombes())
+    {
+      _run = false;
+      _menu = true;
+    }
+  _map.checkExplosion();
+  _map.checkBonus();
 }
 
 void	bomber::Core::draw()
@@ -45,6 +53,12 @@ void	bomber::Core::draw()
 bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer)
 {
   init();
+  _map.setVideoDriver(_driver);
+  _map.setSceneManager(_smgr);
+  _map.setMap(fileManager::openFileToVector(mapFile));
+  _map.buildMap();
+  _map.addPlayer(secondPlayer);
+  _run = true;
   int y = 2100;
   while (_run && _device->run())
     {
@@ -58,11 +72,76 @@ bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer)
       draw();
     }
   clear();
-  return;
+  return _menu;
 }
 
 bool	bomber::Core::isKeyPressed(bool pressedDown, irr::EKEY_CODE key, irr::SEvent const & event)
-{}
+{
+  if (event.EventType == irr::EET_KEY_INPUT_EVENT &&
+      event.KeyInput.Key == key &&
+      event.KeyInput.PressedDown == pressedDown)
+    return true;
+  return false;
+}
 
 bool	bomber::Core::OnEvent(irr::SEvent const & e)
-{}
+{
+  if (e.EventType == irr::EET_KEY_INPUT_EVENT)
+    {
+      irr::u32	time = _device->getTimer()->getTime();
+      switch (e.KeyInput.Key)
+	{
+	case irr::KEY_KEY_Z: // Move forward
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(0, D_UP);
+	  break;
+        case irr::KEY_KEY_Q:
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(0, D_LEFT);
+	  break;
+        case irr::KEY_KEY_S: // Move backward
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(0, D_DOWN);
+	  break;
+        case irr::KEY_KEY_D:
+	  if (e.KeyInput.PressedDown == true)
+          _map.movePlayer(0, D_RIGHT);
+	  break;
+	case irr::KEY_KEY_C:
+	  if (e.KeyInput.PressedDown == false)
+	    _map.actionBomb(0);
+	  break;
+
+	case irr::KEY_KEY_O: // Move forward
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(1, D_UP);
+	  break;
+	case irr::KEY_KEY_K:
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(1, D_LEFT);
+	  break;
+	case irr::KEY_KEY_L: // Move backward
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(1, D_DOWN);
+	  break;
+	case irr::KEY_KEY_M:
+	  if (e.KeyInput.PressedDown == true)
+	    _map.movePlayer(1, D_RIGHT);
+	  break;
+	case irr::KEY_KEY_N:
+	  if (e.KeyInput.PressedDown == false)
+	    _map.actionBomb(1);
+	  break;
+
+	case irr::KEY_ESCAPE: // Quit Game
+	  _run = false;
+	  _menu = false;
+	  break;
+	case irr::KEY_BACK: // Return to menu
+	  _run = false;
+	  _menu = true;
+	  break;
+	}
+    }
+  return false;
+}
