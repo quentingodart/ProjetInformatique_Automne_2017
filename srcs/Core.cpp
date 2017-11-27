@@ -10,7 +10,7 @@ bomber::Core::~Core() {}
 
 void	bomber::Core::init()
 {
-  if ((_device = irr::createDevice(video::EDT_OPENGL,
+  if ((_device = irr::createDevice(irr::video::EDT_OPENGL,
 				   irr::core::dimension2d<irr::u32>(GAME_DIM('x'), GAME_DIM('y')),
 				   DEFAULT_BPP, false, false, false, this)) == NULL)
     throw 1;

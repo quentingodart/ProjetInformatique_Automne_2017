@@ -5,30 +5,30 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 11:36:37 2017 Anaïs Foncel
-// Last update Sun Nov 12 11:53:26 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:11:19 2017 Anaïs Foncel
 //
 
 # include "bomber.hh"
 
-namespace	Bomber
+namespace	bomber
 {
 
-  v2d		getMovVector(Bomber::e_direction dir)
+  v2d		getMovVector(bomber::e_direction dir)
   {
     switch (dir)
       {
       case D_UP:
-	return (Bomber::v2d(-1, 0));
+	return (bomber::v2d(-1, 0));
       case D_DOWN:
-	return (Bomber::v2d(1, 0));
+	return (bomber::v2d(1, 0));
       case D_LEFT:
-	return (Bomber::v2d(0, -1));
+	return (bomber::v2d(0, -1));
       case D_RIGHT:
-	return (Bomber::v2d(0, 1));
+	return (bomber::v2d(0, 1));
       }
   }
 
-  irr::u32      getRotValue(Bomber::e_direction dir)
+  irr::u32      getRotValue(bomber::e_direction dir)
   {
     switch (dir)
       {

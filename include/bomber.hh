@@ -5,13 +5,21 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 09:18:14 2017 Anaïs Foncel
-// Last update Sun Nov 12 11:34:10 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:10:35 2017 Anaïs Foncel
 //
 
 #ifndef BOMBER_HH_
 # define BOMBER_HH_
 
 # include <irrlicht.h>
+
+# define DEFAULT_BPP 24
+
+# define MENU_TITLE L"BomberTrash - Menu"
+# define MENU_DIM(c) ((c) == 'x' ? 800 : ((c) == 'y' ? 600 : 0))
+
+# define GAME_TITLE L"BomberTrash - Game"
+# define GAME_DIM(c) ((c) == 'x' ? 1600 : ((c) == 'y' ? 900 : 0))
 
 # define MOV_SPD 250
 # define BOMB_TIME 3000
@@ -23,7 +31,7 @@
 # define MAX_RANGE 5
 # define MAX_SPEED 5
 
-namespace       Bomber
+namespace       bomber
 {
   typedef irr::core::position2di      v2d;
 
@@ -50,8 +58,8 @@ namespace       Bomber
         D_LEFT
       };
 
-  v2d		getMovVector(Bomber::e_direction dir);
-  irr::u32	getRotValue(Bomber::e_direction dir);
+  v2d		getMovVector(bomber::e_direction dir);
+  irr::u32	getRotValue(bomber::e_direction dir);
 }
 
 #endif

@@ -12,7 +12,14 @@ NAME		= bomberman
 
 SRCS		= main.cpp	\
 		  Errors.cpp	\
-		  Player.cpp
+		  Player.cpp	\
+		  map.cpp	\
+		  Bombe.cpp	\
+		  tools.cpp	\
+		  MenuCore.cpp	\
+		  Core.cpp	\
+		  fileManager.cpp
+
 
 CXX		= g++
 
