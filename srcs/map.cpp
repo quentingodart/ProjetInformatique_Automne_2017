@@ -1,4 +1,3 @@
-l
 #include "map.hh"
 #include "Player.hh"
 
