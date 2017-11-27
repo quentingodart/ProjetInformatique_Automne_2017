@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Mon Nov 27 01:26:22 2017 Anaïs Foncel
+// Last update Mon Nov 27 04:05:42 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
@@ -15,7 +15,7 @@ bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool seco
 {
   irr::scene::IAnimatedMesh	*mesh;
 
-  if (!(mesh = map->getSceneManager()->getMesh("obj/player.b3d")))
+  if (!(mesh = map->getSceneManager()->getMesh("assets/player.b3d")))
     exit(1);
   else if (_node = map->getSceneManager()->addAnimatedMeshSceneNode(mesh))
     {
