@@ -5,13 +5,13 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Mon Nov 27 04:05:42 2017 Anaïs Foncel
+// Last update Sun Dec  3 00:12:50 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
 
 bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP)
-  : _bombs(1), _bombsUse(0), _range(1), _speed(1), _pos(pos), _node(0)
+  : _bombs(1), _bombsUse(0), _range(1), _speed(1), _lastTime(0), _pos(pos), _node(0)
 {
   irr::scene::IAnimatedMesh	*mesh;
 
@@ -19,9 +19,12 @@ bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool seco
     exit(1);
   else if (_node = map->getSceneManager()->addAnimatedMeshSceneNode(mesh))
     {
+      this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      this->_node->setMD2Animation(irr::scene::EMAT_STAND);
       this->_node->setPosition(irr::core::vector3df((pos.X * 100) + map->getBaseX() - 40, 110,
 						    (pos.Y * 100) + map->getBaseY() + 50));
 
+      this->_node->setFrameLoop(0, 13);
       this->_node->setAnimationSpeed(5);
       this->_node->setScale(irr::core::vector3df(10));
       this->_node->setRotation(irr::core::vector3df(0, 0, 0));
@@ -39,15 +42,19 @@ bomber::Player::~Player()
 
 void	bomber::Player::movePlayer(bool move, bomber::e_direction dir, bomber::v2d initPos, irr::u32 time)
 {
-  if (move)
+  if (time > (_lastTime + (MOV_SPD / _speed)))
     {
-      _pos += bomber::getMovVector(dir);
-      this->_node->setPosition(irr::core::vector3df((_pos.X * 100)
-						    + initPos.X - 40, 110,
-						    (_pos.Y * 100)
-						    + initPos.Y + 50));
+      if (move)
+	{
+	  _pos += bomber::getMovVector(dir);
+	  this->_node->setPosition(irr::core::vector3df((_pos.X * 100)
+							+ initPos.X - 40, 110,
+							(_pos.Y * 100)
+							+ initPos.Y + 50));
+	}
+      this->_node->setRotation(irr::core::vector3df(0, bomber::getRotValue(dir), 0));
+      _lastTime = time;
     }
-  this->_node->setRotation(irr::core::vector3df(0, bomber::getRotValue(dir), 0));
 }
 
 void	bomber::Player::giveBonus(e_bonus bonus)
