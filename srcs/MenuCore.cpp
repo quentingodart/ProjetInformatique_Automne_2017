@@ -68,7 +68,7 @@ void	bomber::MenuCore::draw()
 void	bomber::MenuCore::Creat_Menu()
 {
   ITexture *menu;
-  menu = _driver->getTexture("obj/texture/Menu_de_Jeu_sans_bouton.png");
+  menu = _driver->getTexture("assets/texture/Menu_de_Jeu_sans_bouton.png");
   IGUIImage *img;
   img = _guienv->addImage(core::rect<s32>(0,0,800,600));
   img->setImage(menu);
@@ -76,58 +76,58 @@ void	bomber::MenuCore::Creat_Menu()
   _driver->removeTexture(menu);
   // MAIN
   IGUIButton *btn = _guienv->addButton(core::rect<int>(280, 200, 520, 280), 0, 3);
-  btn->setImage(_driver->getTexture("obj/texture/button//bouton_menu_jouer.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_jouer_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button//bouton_menu_jouer.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_jouer_focus.png"));
   _nMenu.push_back({btn, M_MAIN});
   IGUIButton *button2 = _guienv->addButton(core::rect<int>(280, 320, 520, 400), 0, 4);
-  button2->setImage(_driver->getTexture("obj/texture/button//bouton_menu_option.png"));
-  button2->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_option_focus.png"));
+  button2->setImage(_driver->getTexture("assets/texture/button//bouton_menu_option.png"));
+  button2->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_option_focus.png"));
   _nMenu.push_back({button2, M_MAIN});
   IGUIButton *button3 = _guienv->addButton(core::rect<int>(280, 440, 520, 520), 0, 5);
-  button3->setImage(_driver->getTexture("obj/texture/button//bouton_menu_quitter.png"));
-  button3->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_quitter_focus.png"));
+  button3->setImage(_driver->getTexture("assets/texture/button//bouton_menu_quitter.png"));
+  button3->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_quitter_focus.png"));
   _nMenu.push_back({button3, M_MAIN});
   IGUIButton *button4 = _guienv->addButton(core::rect<int>(538, 533, 700, 584), 0, 6);
-  button4->setImage(_driver->getTexture("obj/texture/button/bouton_menu_credit.png"));
-  button4->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_credit_focus.png"));
+  button4->setImage(_driver->getTexture("assets/texture/button/bouton_menu_credit.png"));
+  button4->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_credit_focus.png"));
   _nMenu.push_back({button4, M_MAIN});
   IGUIButton *button5 = _guienv->addButton(core::rect<int>(720, 533, 780, 585), 0, 7);
-  button5->setImage(_driver->getTexture("obj/texture/button//bouton_sound_focus.png"));
-  button5->setPressedImage(_driver->getTexture("obj/texture/button/bouton_sound_active.png"));
+  button5->setImage(_driver->getTexture("assets/texture/button//bouton_sound_focus.png"));
+  button5->setPressedImage(_driver->getTexture("assets/texture/button/bouton_sound_active.png"));
   _nMenu.push_back({button5, M_MAIN});
   // PLAY
   btn = _guienv->addButton(core::rect<int>(280, 200, 520, 280), 0, 10);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_menu_one_player.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_one_player_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_menu_one_player.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_one_player_focus.png"));
   _nMenu.push_back({btn, M_PLAY});
   btn = _guienv->addButton(core::rect<int>(280, 320, 520, 400), 0, 11);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_menu_two_player.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button/bouton_menu_two_player_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_menu_two_player.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_two_player_focus.png"));
   _nMenu.push_back({btn, M_PLAY});
   btn = _guienv->addButton(core::rect<int>(280, 440, 520, 520), 0, 12);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_menu_ia.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_menu_ia.png"));
   _nMenu.push_back({btn, M_PLAY});
   btn = _guienv->addButton(core::rect<int>(720, 533, 780, 585), 0, 8);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_fleche_retour.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button/bouton_fleche_retour_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_fleche_retour.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button/bouton_fleche_retour_focus.png"));
   _nMenu.push_back({btn, M_PLAY});
   // OPTION
   img = _guienv->addImage(core::rect<s32>(0,0,800,600));
-  img->setImage(_driver->getTexture("obj/texture/Rules_And_Controls_sans_bouton.png"));
+  img->setImage(_driver->getTexture("assets/texture/Rules_And_Controls_sans_bouton.png"));
   img->setScaleImage(true);
   _nMenu.push_back({img, M_OPTION});
   btn = _guienv->addButton(core::rect<int>(720, 533, 780, 585), 0, 9);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_fleche_retour.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button//bouton_fleche_retour_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_fleche_retour.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button//bouton_fleche_retour_focus.png"));
   _nMenu.push_back({btn, M_OPTION});
   // CREDITS
   img = _guienv->addImage(core::rect<s32>(0,0,800,600));
-  img->setImage(_driver->getTexture("obj/texture/credit_sans_bouton.png"));
+  img->setImage(_driver->getTexture("assets/texture/credit_sans_bouton.png"));
   img->setScaleImage(true);
   _nMenu.push_back({img, M_CREDIT});
   btn = _guienv->addButton(core::rect<int>(20, 533, 80, 585), 0, 9);
-  btn->setImage(_driver->getTexture("obj/texture/button/bouton_fleche_retour.png"));
-  btn->setPressedImage(_driver->getTexture("obj/texture/button//bouton_fleche_retour_focus.png"));
+  btn->setImage(_driver->getTexture("assets/texture/button/bouton_fleche_retour.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button//bouton_fleche_retour_focus.png"));
   _nMenu.push_back({btn, M_CREDIT});
 
 }
