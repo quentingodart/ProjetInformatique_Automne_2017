@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sat Nov 18 05:22:58 2017 Anaïs Foncel
-// Last update Sun Nov 26 18:21:02 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:27:05 2017 Anaïs Foncel
 //
 
 #ifndef HUD_HH__
@@ -23,7 +23,7 @@ private:
   IrrlichtDevice		*_device;
   video::IVideoDriver		*_driver;
 
-  std::vector<Bomber::Player>		_players;
+  std::vector<bomber::Player>		_players;
 
   int				_size_windowX;
   int				_size_windowY;

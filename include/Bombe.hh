@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 11:02:01 2017 Anaïs Foncel
-// Last update Sun Nov 26 18:10:00 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:09:09 2017 Anaïs Foncel
 //
 
 #ifndef BOMBE_HH_
@@ -14,12 +14,12 @@
 # include <irrlicht.h>
 # include "bomber.hh"
 
-namespace		Bomber
+namespace		bomber
 {
   class		Bombe
   {
   public:
-    Bombe(Bomber::v2d const &pos, int range);
+    Bombe(bomber::v2d const &pos, int range);
     ~Bombe();
 
     /*
@@ -28,7 +28,7 @@ namespace		Bomber
     int		getX() const;
     int		getY() const;
     int		getRange() const;
-    Bomber::v2d	getPos() const;
+    bomber::v2d	getPos() const;
     irr::u32	getTime() const;
 
     /*
