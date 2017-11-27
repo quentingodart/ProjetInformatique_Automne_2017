@@ -27,9 +27,9 @@ bomber::v2d	bomber::Map::getPlayerPosition(bool second) const
 
 void	bomber::Map::addPlayer(bool second)
 {
-  _player.push_back(Player(getPlayerPosition(false), this));
+  _player.push_back(Player(getPlayerPosition(false), this, false));
   if (second)
-    _player.push_back(Player(getPlayerPosition(second), this));
+    _player.push_back(Player(getPlayerPosition(second), this, true));
 }
 
 void	bomber::Map::choiceBonus(bomber::v2d const & pos)
