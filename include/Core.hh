@@ -3,9 +3,9 @@
 
 # include <string>
 
+# include "fileManager.hh"
 # include "bomber.hh"
 # include "map.hh"
-# include "fileManager.hh"
 
 namespace	bomber
 {
