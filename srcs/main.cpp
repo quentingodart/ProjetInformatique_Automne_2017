@@ -1,14 +1,18 @@
-//
-// main.cpp for  in /home/foncel_a/UQAR/rendu/ProjetInformatique_Automne_2017/src
-// 
-// Made by Anaïs Foncel
-// Login   <foncel_a@epitech.net>
-// 
-// Started on  Sun Nov 12 07:29:03 2017 Anaïs Foncel
-// Last update Sun Nov 12 07:30:01 2017 Anaïs Foncel
-//
+
+#include "Core.hh"
+#include "MenuCore.hh"
 
 int	main(int ac, char const *av[])
 {
+  bomber::MenuCore	menu;
+  std::string		map;
+  bool			secondPlayer(false);
+
+  while ((menu.run(map, secondPlayer)))
+    {
+      bomber::Core	core;
+      if (!core.run(map, secondPlayer))
+	  break;
+    }
   return 0;
 }
