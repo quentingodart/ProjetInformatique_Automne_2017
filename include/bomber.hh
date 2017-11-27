@@ -13,6 +13,14 @@
 
 # include <irrlicht.h>
 
+# define DEFAULT_BPP 24
+
+# define MENU_TITLE L"BomberTrash - Menu"
+# define MENU_DIM(c) ((c) == 'x' ? 800 : ((c) == 'y' ? 600 : 0))
+
+# define GAME_TITLE L"BomberTrash - Game"
+# define GAME_DIM(c) ((c) == 'x' ? 1600 : ((c) == 'y' ? 900 : 0))
+
 # define MOV_SPD 250
 # define BOMB_TIME 3000
 # define EXP_TIME 500

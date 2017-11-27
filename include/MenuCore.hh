@@ -35,6 +35,8 @@ namespace	bomber
       void		draw();
 
       void		chooseMenu(bomber::e_menu menu);
+      bool		isKeyPressed(irr::EKEY_CODE, irr::SEvent const &);
+      virtual bool	OnEvent(irr::SEvent const &);
 
     private:
       irr::IrrlichtDevice	*_device;
