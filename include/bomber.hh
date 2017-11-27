@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 09:18:14 2017 Anaïs Foncel
-// Last update Sun Nov 12 11:34:10 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:10:35 2017 Anaïs Foncel
 //
 
 #ifndef BOMBER_HH_
@@ -23,7 +23,7 @@
 # define MAX_RANGE 5
 # define MAX_SPEED 5
 
-namespace       Bomber
+namespace       bomber
 {
   typedef irr::core::position2di      v2d;
 
@@ -50,8 +50,8 @@ namespace       Bomber
         D_LEFT
       };
 
-  v2d		getMovVector(Bomber::e_direction dir);
-  irr::u32	getRotValue(Bomber::e_direction dir);
+  v2d		getMovVector(bomber::e_direction dir);
+  irr::u32	getRotValue(bomber::e_direction dir);
 }
 
 #endif
