@@ -5,15 +5,16 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:52:20 2017 Anaïs Foncel
-// Last update Sat Nov 18 05:40:08 2017 Anaïs Foncel
+// Last update Mon Nov 27 01:26:37 2017 Anaïs Foncel
 //
 
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 
 # include "bomber.hh"
+# include "map.hh"
 
-namespace	Bomber
+namespace	bomber
 {
   class		Player
   {
@@ -23,16 +24,16 @@ namespace	Bomber
     int			_range;
     irr::u32		_speed;
 
-    Bomber::v2d		_pos;
+    bomber::v2d		_pos;
 
     irr::scene::IAnimatedMeshSceneNode	*_node;
 
   public:
-    Player(Bomber::v2d const &pos);
+    Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP);
     ~Player();
 
-    void				movePlayer(bool move, Bomber::e_direction dir, Bomber::v2d initPos);
-    void				takeBonus(e_bonus bonus);
+    void				movePlayer(bool move, bomber::e_direction dir, bomber::v2d initPos, irr::u32 time);
+    void				giveBonus(e_bonus bonus);
 
     void				addSpeed();
     void				addRange();
@@ -54,7 +55,7 @@ namespace	Bomber
 
     int					getX() const;
     int					getY() const;
-    Bomber::v2d const			&getPos() const;
+    bomber::v2d const			&getPos() const;
     irr::scene::IAnimatedMeshSceneNode	*getNode() const;
   };
 }
