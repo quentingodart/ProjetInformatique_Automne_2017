@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:52:20 2017 Anaïs Foncel
-// Last update Mon Nov 27 01:26:37 2017 Anaïs Foncel
+// Last update Sun Dec  3 00:04:38 2017 Anaïs Foncel
 //
 
 #ifndef PLAYER_HH_
@@ -23,7 +23,7 @@ namespace	bomber
     int			_bombsUse;
     int			_range;
     irr::u32		_speed;
-
+    irr::u32		_lastTime;
     bomber::v2d		_pos;
 
     irr::scene::IAnimatedMeshSceneNode	*_node;
