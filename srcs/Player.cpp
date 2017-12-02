@@ -5,13 +5,13 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Sun Dec  3 00:12:50 2017 Anaïs Foncel
+// Last update Sun Dec  3 00:32:05 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
 
-bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP)
-  : _bombs(1), _bombsUse(0), _range(1), _speed(1), _lastTime(0), _pos(pos), _node(0)
+bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP, std::string const name)
+  : _name(name), _job("Etudiant à l'UQAR de Rimouski"), _bombs(1), _bombsUse(0), _range(1), _speed(1), _lastTime(0), _pos(pos), _node(0)
 {
   irr::scene::IAnimatedMesh	*mesh;
 

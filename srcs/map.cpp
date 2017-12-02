@@ -27,9 +27,9 @@ bomber::v2d	bomber::Map::getPlayerPosition(bool second) const
 
 void	bomber::Map::addPlayer(bool second)
 {
-  _player.push_back(Player(getPlayerPosition(false), this, false));
+  _player.push_back(Player(getPlayerPosition(false), this, false, "Anaïs Godart"));
   if (second)
-    _player.push_back(Player(getPlayerPosition(second), this, true));
+    _player.push_back(Player(getPlayerPosition(second), this, true, "Maxime Germe"));
 }
 
 void	bomber::Map::choiceBonus(bomber::v2d const & pos)
