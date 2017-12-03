@@ -3,6 +3,7 @@
 
 # include <string>
 # include <vector>
+# include <iostream>
 
 # include "bomber.hh"
 
@@ -29,7 +30,7 @@ namespace	bomber
 
       void		init();
       void		clear();
-      bool		run(std::string &, bool &);
+      bool		run(std::string &, bool &, bool &);
       void		update();
       void		Creat_Menu();
       void		draw();
@@ -46,6 +47,7 @@ namespace	bomber
       std::vector<t_menuNode>	_nMenu;
 
       bool			_start;
+      bool			_IA;
       bool			_secondPlayer;  };
 }
 

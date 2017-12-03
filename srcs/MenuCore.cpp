@@ -15,7 +15,7 @@ bomber::MenuCore::~MenuCore()
 {
 }
 
-bool	bomber::MenuCore::run(std::string & map, bool & secondPlayer)
+bool	bomber::MenuCore::run(std::string & map, bool & secondPlayer, bool & IA)
 {
   init();
   Creat_Menu();
@@ -27,6 +27,7 @@ bool	bomber::MenuCore::run(std::string & map, bool & secondPlayer)
     }
   clear();
   secondPlayer = _secondPlayer;
+  IA = _IA;
   return _start;
 }
 
@@ -202,6 +203,15 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
 	      _secondPlayer = true;
 	    }
       	  break;
+	case 12:
+  	  if (event.GUIEvent.EventType == gui::EGET_BUTTON_CLICKED )
+	    {
+	      _device->closeDevice();
+	      _start = true;
+	      _IA = true;
+	    }
+      	  break;
+
 	}
     }
   if (isKeyPressed(irr::KEY_KEY_P, event))
