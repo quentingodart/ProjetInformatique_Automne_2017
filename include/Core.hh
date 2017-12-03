@@ -29,6 +29,7 @@ namespace	bomber
     irr::video::IVideoDriver	*_driver;
     irr::scene::ISceneManager	*_smgr;
 
+    bool			_pause;
     bool			_run;
     bool			_menu;
 

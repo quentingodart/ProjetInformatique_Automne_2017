@@ -354,6 +354,26 @@ bool	bomber::Map::removePosition(bomber::v2d const & pos)
   return true;
 }
 
+void	bomber::Map::setPause(bool pause)
+{
+  irr::u32 interval;
+  
+  if (!pause)
+    {
+      std::cout << _pausetime << "   time =" << _time << std::endl;
+      interval = _time - _pausetime;
+      for (int i = 0; i < _bombes.size(); i++)
+	{
+	  _bombes[i]->setTime(_bombes[i]->getTime() + interval);
+	}
+    }
+  else
+    {
+      _pausetime = _time;
+      std::cout << _pausetime << std::endl;
+    }
+}
+
 void	bomber::Map::clearUp(bomber::v2d const & pos, int range)
 {
   if (removePosition(pos) && range > 0)

@@ -76,6 +76,7 @@ namespace	bomber
 
     protected:
       int	_end;
+      irr::u32	_pausetime;
       irr::u32	_time;
 
       bomber::v2d	_size;
@@ -108,6 +109,7 @@ namespace	bomber
       void	setMap(const std::vector<std::string> file);
       void	setVideoDriver(irr::video::IVideoDriver *driver);
       void	setSceneManager(irr::scene::ISceneManager *smgr);
+      void	setPause(bool pause);
 
     };
 }
