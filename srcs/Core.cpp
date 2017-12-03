@@ -50,7 +50,7 @@ void	bomber::Core::draw()
     _device->yield();
 }
 
-bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer)
+bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer, bool IA)
 {
   init();
   _map.setVideoDriver(_driver);
