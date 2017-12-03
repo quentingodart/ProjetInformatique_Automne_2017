@@ -1,5 +1,5 @@
 #include "map.hh"
-#include "Player.hh"
+#include "IA.hh"
 
 bomber::Map::Map() : _end(0), _time(0) {}
 
@@ -25,15 +25,15 @@ bomber::v2d	bomber::Map::getPlayerPosition(bool second) const
   return bomber::v2d(3, 3);
 }
 
-void	bomber::Map::addPlayer(bool second, bool IA)
+void	bomber::Map::addPlayer(bool second, bool Ia)
 {
   _player.push_back(Player(getPlayerPosition(false), this, false, 0, "Anaïs Godart"));
   if (second)
     _player.push_back(Player(getPlayerPosition(second), this, true, 0, "Maxime Germe"));
-  else if (IA) {
-    // _player.push_back(IA(bomber::v2d(15, 15), this, false, 1, "Quentin Foncel"));
-    // _player.push_back(IA(bomber::v2d(3, 15), this, false, 2, "Louis Boucher"));
-    // _player.push_back(IA(bomber::v2d(15, 3), this, false, 3, "Louis Mollonguet"));
+  else if (Ia) {
+     _player.push_back(IA(bomber::v2d(16, 15), this, false, 1, "Quentin Foncel"));
+     _player.push_back(IA(bomber::v2d(3, 15), this, false, 2, "Louis Boucher"));
+     _player.push_back(IA(bomber::v2d(16, 3), this, false, 3, "Louis Mollonguet"));
   }
 }
 
