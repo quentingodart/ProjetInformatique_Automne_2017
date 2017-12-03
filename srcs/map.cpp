@@ -64,7 +64,7 @@ int    bomber::Map::checkBombes()
 	  _player[_nBomb[i].var].setBombsUse(-1);
           _nBomb.erase(_nBomb.begin() + i);
           clearBlock(_bombes[i]->getPos(), _bombes[i]->getRange());
-	  // son.Play_Sound("./sono/fire.wav");
+	  son.Play_Sound("./sono/fire.wav");
           _bombes.erase(_bombes.begin() + i);
           i--;
         }
@@ -92,7 +92,7 @@ void	bomber::Map::checkBonus()
       bomber::v2d	bPos(_nBonus[i].x, _nBonus[i].y);
       if (_player[0].getPos() == bPos)
 	{
-	  // son.Play_Sound("./sono/bonus.wav");
+	  son.Play_Sound("./sono/bonus.wav");
 	  _nBonus[i].node->remove();
 	  _player[0].giveBonus((e_bonus)_nBonus[i].var);
 	  _nBonus.erase(_nBonus.begin() + i);
@@ -100,7 +100,7 @@ void	bomber::Map::checkBonus()
 	}
       if (_player[1].getPos() == bPos)
 	{
-	  // son.Play_Sound("./sono/bonus.wav");
+	  son.Play_Sound("./sono/bonus.wav");
 	  _nBonus[i].node->remove();
 	  _player[1].giveBonus((e_bonus)_nBonus[i].var);
 	  _nBonus.erase(_nBonus.begin() + i);
