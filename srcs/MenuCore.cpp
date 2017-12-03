@@ -92,8 +92,8 @@ void	bomber::MenuCore::Creat_Menu()
   button4->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_credit_focus.png"));
   _nMenu.push_back({button4, M_MAIN});
   IGUIButton *button5 = _guienv->addButton(core::rect<int>(720, 533, 780, 585), 0, 7);
-  button5->setImage(_driver->getTexture("assets/texture/button//bouton_sound_focus.png"));
-  button5->setPressedImage(_driver->getTexture("assets/texture/button/bouton_sound_active.png"));
+  button5->setImage(_driver->getTexture("assets/texture/button//bouton_sound.png"));
+  button5->setPressedImage(_driver->getTexture("assets/texture/button/bouton_sound_focus.png"));
   _nMenu.push_back({button5, M_MAIN});
   // PLAY
   btn = _guienv->addButton(core::rect<int>(280, 200, 520, 280), 0, 10);
