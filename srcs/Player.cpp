@@ -5,12 +5,12 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Sun Dec  3 00:32:05 2017 Anaïs Foncel
+// Last update Sun Dec  3 02:13:43 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
 
-bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP, std::string const name)
+bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP, int IA, std::string const name)
   : _name(name), _job("Etudiant à l'UQAR de Rimouski"), _bombs(1), _bombsUse(0), _range(1), _speed(1), _lastTime(0), _pos(pos), _node(0)
 {
   irr::scene::IAnimatedMesh	*mesh;
@@ -28,7 +28,7 @@ bomber::Player::Player(bomber::v2d const &pos, bomber::Map const *map, bool seco
       this->_node->setAnimationSpeed(5);
       this->_node->setScale(irr::core::vector3df(10));
       this->_node->setRotation(irr::core::vector3df(0, 0, 0));
-      if (!secondP)
+      if (!secondP && IA == 0)
 	this->_node->setMaterialTexture(0, map->getVideoDriver()->getTexture("assets/texture/player1.png"));
       else
 	this->_node->setMaterialTexture(0, map->getVideoDriver()->getTexture("assets/texture/player2.png"));

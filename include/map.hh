@@ -41,7 +41,7 @@ namespace	bomber
       ~Map();
 
       int	buildMap();
-      void	addPlayer(bool);
+      void	addPlayer(bool, bool);
 
       void	choiceBonus(bomber::v2d const &);
       int	checkBombes();
