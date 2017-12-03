@@ -26,33 +26,42 @@ void	bomber::Core::clear()
   _device->drop();
 }
 
-void	bomber::Core::update(bool second)
+void	bomber::Core::update(bool second, bool Ia)
 {
   int	player;
   _map.setTime(_device->getTimer()->getTime());
-  if (player = _map.checkBombes())
+  if (!_pause)
     {
-      // Dead screen
-      if (_deadTime == 0)
+      if (player = _map.checkBombes())
 	{
-	  // son.Play_Sound("./sono/mort.ogg");
-	  _deadTime = _device->getTimer()->getTime();
-	  irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
-	  if (second)
+	  // Dead screen
+	  if (_deadTime == 0)
 	    {
-	      if (player == 2)
-		img->setImage(_driver->getTexture("assets/texture/dead_screen_one.png"));
+	      son.Play_Sound("./sono/mort.ogg");
+	      _deadTime = _device->getTimer()->getTime();
+	      irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
+	      if (second)
+		{
+		  if (player == 2)
+		    img->setImage(_driver->getTexture("assets/texture/dead_screen_player1.png"));
+		  else
+		    img->setImage(_driver->getTexture("assets/texture/dead_screen_player2.png"));
+		}
+	      else if (Ia) {
+		if (player == 0)
+		  img->setImage(_driver->getTexture("assets/texture/dead_screen_player1.png"));
+		else
+		  img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
+	      }
 	      else
-		img->setImage(_driver->getTexture("assets/texture/dead_screen_two.png"));
+		img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
+	      img->setScaleImage(true);
 	    }
-	  else
-	    img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
-	  img->setScaleImage(true);
+	  _menu = true;
 	}
-      _menu = true;
+      _map.checkExplosion();
+      _map.checkBonus();
     }
-  _map.checkExplosion();
-  _map.checkBonus();
 }
 
 void	bomber::Core::draw()
@@ -60,7 +69,7 @@ void	bomber::Core::draw()
   if (_device->isWindowActive())
     {
       _driver->beginScene(true, true, irr::video::SColor(255,20,20,24));
-      if (!_deadTime)
+      if (!_deadTime && !_pause)
 	_smgr->drawAll();
       else
 	_device->getGUIEnvironment()->drawAll();
@@ -83,7 +92,7 @@ bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer, bool IA)
   int y = 2100;
   while (_run && _device->run())
     {
-      update(secondPlayer);
+      update(secondPlayer, IA);
       // TODO: use animation
       if (y != 1000)
 	{
@@ -163,6 +172,12 @@ bool	bomber::Core::OnEvent(irr::SEvent const & e)
 		{
 		  _pause = !_pause;
 		  _map.setPause(_pause);
+		  if (_pause)
+		    {
+		      irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
+		      img->setImage(_driver->getTexture("assets/texture/pause_screen.png"));
+		      img->setScaleImage(true);
+		    }
 		}
 	      break;
 	    case irr::KEY_ESCAPE: // Return to menu

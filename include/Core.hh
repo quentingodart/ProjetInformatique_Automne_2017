@@ -16,14 +16,14 @@ namespace	bomber
     Core();
     ~Core();
 
-    // My_Sound		son;
+    My_Sound		son;
 
     virtual bool	OnEvent(irr::SEvent const & event);
 
     void		init();
     void		clear();
     bool		run(std::string const &, bool = false, bool = false);
-    void		update(bool);
+    void		update(bool, bool);
     void		draw();
 
     bool		isKeyPressed(bool, irr::EKEY_CODE, irr::SEvent const &);

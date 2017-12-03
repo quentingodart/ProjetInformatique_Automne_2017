@@ -94,7 +94,7 @@ namespace	bomber
       irr::video::IVideoDriver	*_driver;
       irr::scene::ISceneManager	*_smgr;
 
-      // My_Sound			son;
+      My_Sound			son;
 
     public:
       int			getBaseX() const;

@@ -8,7 +8,7 @@ using namespace io;
 using namespace gui;
 
 bomber::MenuCore::MenuCore()
-: _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false)
+  : _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false), _sound_count(false)
 {}
 
 bomber::MenuCore::~MenuCore()
@@ -41,7 +41,7 @@ void	bomber::MenuCore::init()
       || (_smgr = _device->getSceneManager()) == NULL
       || (_guienv = _device->getGUIEnvironment()) == NULL)
     throw 1;
-  // son.Play_Sound("./sono/menu.wav");
+  son.Play_Sound("./sono/menu.wav");
   _device->setWindowCaption(MENU_TITLE);
   _start = false;
 
@@ -49,7 +49,7 @@ void	bomber::MenuCore::init()
 
 void	bomber::MenuCore::clear()
 {
-  // son.Stop();
+  son.Stop();
   _device->drop();
   _nMenu.clear();
 }
@@ -179,7 +179,16 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
         case 7:
     	  if (event.GUIEvent.EventType == gui::EGET_BUTTON_CLICKED )
     	    {
-	      // SOUND
+	      if (_sound_count == false)
+		{
+		  son.Stop();
+		  _sound_count = true;
+		}
+	      else
+		{
+		  son.Play_Sound("./sono/menu.wav");
+		  _sound_count = false;
+		}
 	    }
 	  break;
           case 8:

@@ -40,8 +40,8 @@ namespace	bomber
       void		chooseMenu(bomber::e_menu menu);
       bool		isKeyPressed(irr::EKEY_CODE, irr::SEvent const &);
       virtual bool	OnEvent(irr::SEvent const &);
-
-      // My_Sound			son;
+      
+      My_Sound			son;
 
     private:
       irr::IrrlichtDevice	*_device;
@@ -52,7 +52,8 @@ namespace	bomber
 
       bool			_start;
       bool			_IA;
-      bool			_secondPlayer;  };
+      bool			_secondPlayer;
+      bool			_sound_count; };
 }
 
 #endif // MENUCORE_H_
