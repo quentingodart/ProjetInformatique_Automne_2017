@@ -8,7 +8,7 @@ using namespace io;
 using namespace gui;
 
 bomber::MenuCore::MenuCore()
-: _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false)
+  : _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false), _sound_count(false)
 {}
 
 bomber::MenuCore::~MenuCore()
@@ -178,7 +178,16 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
         case 7:
     	  if (event.GUIEvent.EventType == gui::EGET_BUTTON_CLICKED )
     	    {
-	      // SOUND
+	      if (sound_count == false)
+		{
+		  son.Stop();
+		  sound_count = true;
+		}
+	      else
+		{
+		  son.Play();
+		  sound_count = false;
+		}
 	    }
 	  break;
           case 8:
