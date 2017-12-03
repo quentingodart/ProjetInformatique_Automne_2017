@@ -32,7 +32,8 @@ namespace	bomber
     bool			_pause;
     bool			_run;
     bool			_menu;
-
+    bool			_player;
+    
     Map			_map;
 
   public:
