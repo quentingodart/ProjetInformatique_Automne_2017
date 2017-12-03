@@ -19,7 +19,8 @@ bool	bomber::MenuCore::run(std::string & map, bool & secondPlayer, bool & IA)
 {
   init();
   Creat_Menu();
-  map = "map";
+  if (map.compare("") == 0)
+    map = "map";
   chooseMenu(M_MAIN);
   while(_device->run())
     {
