@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:52:20 2017 Anaïs Foncel
-// Last update Sun Dec  3 00:32:34 2017 Anaïs Foncel
+// Last update Sun Dec  3 01:41:52 2017 Anaïs Foncel
 //
 
 #ifndef PLAYER_HH_
@@ -32,7 +32,7 @@ namespace	bomber
     irr::scene::IAnimatedMeshSceneNode	*_node;
 
   public:
-    Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP, std::string name);
+    Player(bomber::v2d const &pos, bomber::Map const *map, bool secondP, int IA, std::string name);
     ~Player();
 
     void				movePlayer(bool move, bomber::e_direction dir, bomber::v2d initPos, irr::u32 time);
