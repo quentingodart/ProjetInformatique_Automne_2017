@@ -1,7 +1,7 @@
 #include "Core.hh"
 
 bomber::Core::Core()
-: _device(0), _driver(0), _smgr(0), _run(false), _menu(false), _map()
+  : _device(0), _driver(0), _smgr(0), _run(false), _menu(false), _deadTime(0), _map()
 
 {
   //  irr::video::EDT_OPENGL;
@@ -26,19 +26,33 @@ void	bomber::Core::clear()
   _device->drop();
 }
 
-void	bomber::Core::update()
+void	bomber::Core::update(bool second)
 {
+  int	player;
   _map.setTime(_device->getTimer()->getTime());
-  if (!_pause)
+  if (player = _map.checkBombes())
     {
-      if (_map.checkBombes())
+      // Dead screen
+      if (_deadTime == 0)
 	{
-	  _run = false;
-	  _menu = true;
+	  son.Play_Sound("./sono/mort.ogg");
+	  _deadTime = _device->getTimer()->getTime();
+	  irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1024,768));
+	  if (second)
+	    {
+	      if (player == 2)
+		img->setImage(_driver->getTexture("obj/texture/dead_screen_one.png"));
+	      else
+		img->setImage(_driver->getTexture("obj/texture/dead_screen_two.png"));
+	    }
+	  else
+	    img->setImage(_driver->getTexture("obj/texture/dead_screen.png"));
+	  img->setScaleImage(true);
 	}
-      _map.checkExplosion();
-      _map.checkBonus();
+      _menu = true;
     }
+  _map.checkExplosion();
+  _map.checkBonus();
 }
 
 void	bomber::Core::draw()
@@ -46,7 +60,10 @@ void	bomber::Core::draw()
   if (_device->isWindowActive())
     {
       _driver->beginScene(true, true, irr::video::SColor(255,20,20,24));
-      _smgr->drawAll();
+      if (!_deadTime)
+	_smgr->drawAll();
+      else
+	_device->getGUIEnvironment()->drawAll();
       _driver->endScene();
     }
   else
@@ -66,7 +83,7 @@ bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer, bool IA)
   int y = 2100;
   while (_run && _device->run())
     {
-      update();
+      update(secondPlayer);
       // TODO: use animation
       if (y != 1000)
 	{

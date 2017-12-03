@@ -19,7 +19,8 @@ SRCS		= main.cpp	\
 		  MenuCore.cpp	\
 		  Core.cpp	\
 		  fileManager.cpp \
-		  IA.cpp
+		  IA.cpp	\
+		  Son.cpp
 
 
 CXX		= g++
