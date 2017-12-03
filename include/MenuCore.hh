@@ -6,6 +6,8 @@
 # include <iostream>
 
 # include "bomber.hh"
+# include "Son.hpp"
+
 
 namespace	bomber
 {
@@ -38,6 +40,8 @@ namespace	bomber
       void		chooseMenu(bomber::e_menu menu);
       bool		isKeyPressed(irr::EKEY_CODE, irr::SEvent const &);
       virtual bool	OnEvent(irr::SEvent const &);
+
+      My_Sound			son;
 
     private:
       irr::IrrlichtDevice	*_device;
