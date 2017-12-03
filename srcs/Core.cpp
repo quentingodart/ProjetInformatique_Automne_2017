@@ -57,7 +57,7 @@ bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer)
   _map.setSceneManager(_smgr);
   _map.setMap(fileManager::openFileToVector(mapFile));
   _map.buildMap();
-  _map.addPlayer(secondPlayer);
+  _map.addPlayer(secondPlayer, IA);
   _run = true;
   int y = 2100;
   while (_run && _device->run())
@@ -111,28 +111,26 @@ bool	bomber::Core::OnEvent(irr::SEvent const & e)
 	  if (e.KeyInput.PressedDown == false)
 	    _map.actionBomb(0);
 	  break;
-
-	case irr::KEY_KEY_O: // Move forward
-	  if (e.KeyInput.PressedDown == true)
-	    _map.movePlayer(1, D_UP);
-	  break;
-	case irr::KEY_KEY_K:
-	  if (e.KeyInput.PressedDown == true)
-	    _map.movePlayer(1, D_LEFT);
-	  break;
-	case irr::KEY_KEY_L: // Move backward
-	  if (e.KeyInput.PressedDown == true)
-	    _map.movePlayer(1, D_DOWN);
-	  break;
-	case irr::KEY_KEY_M:
-	  if (e.KeyInput.PressedDown == true)
-	    _map.movePlayer(1, D_RIGHT);
-	  break;
-	case irr::KEY_KEY_N:
-	  if (e.KeyInput.PressedDown == false)
-	    _map.actionBomb(1);
-	  break;
-
+	    case irr::KEY_KEY_O: // Move forward
+	      if (e.KeyInput.PressedDown == true)
+		_map.movePlayer(1, D_UP);
+	      break;
+	    case irr::KEY_KEY_K:
+	      if (e.KeyInput.PressedDown == true)
+		_map.movePlayer(1, D_LEFT);
+	      break;
+	    case irr::KEY_KEY_L: // Move backward
+	      if (e.KeyInput.PressedDown == true)
+		_map.movePlayer(1, D_DOWN);
+	      break;
+	    case irr::KEY_KEY_M:
+	      if (e.KeyInput.PressedDown == true)
+		_map.movePlayer(1, D_RIGHT);
+	      break;
+	    case irr::KEY_KEY_N:
+	      if (e.KeyInput.PressedDown == false)
+		_map.actionBomb(1);
+	      break;
 	case irr::KEY_ESCAPE: // Quit Game
 	  _run = false;
 	  _menu = false;
