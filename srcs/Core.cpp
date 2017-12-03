@@ -41,12 +41,12 @@ void	bomber::Core::update(bool second)
 	  if (second)
 	    {
 	      if (player == 2)
-		img->setImage(_driver->getTexture("obj/texture/dead_screen_one.png"));
+		img->setImage(_driver->getTexture("assets/texture/dead_screen_one.png"));
 	      else
-		img->setImage(_driver->getTexture("obj/texture/dead_screen_two.png"));
+		img->setImage(_driver->getTexture("assets/texture/dead_screen_two.png"));
 	    }
 	  else
-	    img->setImage(_driver->getTexture("obj/texture/dead_screen.png"));
+	    img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
 	  img->setScaleImage(true);
 	}
       _menu = true;
