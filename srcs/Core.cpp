@@ -37,7 +37,7 @@ void	bomber::Core::update(bool second)
 	{
 	  son.Play_Sound("./sono/mort.ogg");
 	  _deadTime = _device->getTimer()->getTime();
-	  irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1024,768));
+	  irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
 	  if (second)
 	    {
 	      if (player == 2)
