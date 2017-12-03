@@ -40,7 +40,7 @@ void	bomber::MenuCore::init()
       || (_smgr = _device->getSceneManager()) == NULL
       || (_guienv = _device->getGUIEnvironment()) == NULL)
     throw 1;
-  son.Play_Sound("./src/sono/menu.wav");
+  son.Play_Sound("./sono/menu.wav");
   _device->setWindowCaption(MENU_TITLE);
   _start = false;
 
