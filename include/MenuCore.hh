@@ -41,7 +41,7 @@ namespace	bomber
       bool		isKeyPressed(irr::EKEY_CODE, irr::SEvent const &);
       virtual bool	OnEvent(irr::SEvent const &);
 
-      My_Sound			son;
+      // My_Sound			son;
 
     private:
       irr::IrrlichtDevice	*_device;

@@ -16,7 +16,7 @@ namespace	bomber
     Core();
     ~Core();
 
-    My_Sound		son;
+    // My_Sound		son;
 
     virtual bool	OnEvent(irr::SEvent const & event);
 

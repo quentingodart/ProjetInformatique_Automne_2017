@@ -7,10 +7,11 @@
 class	My_Sound
 {
 private:
+    sf::SoundBuffer	buffer;
+    sf::Sound		sound;
+    sf::Music		music;
 
-  sf::SoundBuffer	buffer;
-  sf::Sound		sound;
-
+  
 public:
 
   My_Sound();
