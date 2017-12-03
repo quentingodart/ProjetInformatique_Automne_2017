@@ -13,8 +13,8 @@
 # include <ctime>
 
 # include "bomber.hh"
-//# include "event.hpp"
 # include "Bombe.hh"
+# include "Son.hpp"
 
 namespace	bomber
 {
@@ -93,6 +93,8 @@ namespace	bomber
 
       irr::video::IVideoDriver	*_driver;
       irr::scene::ISceneManager	*_smgr;
+
+      My_Sound			son;
 
     public:
       int			getBaseX() const;
