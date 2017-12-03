@@ -360,7 +360,6 @@ void	bomber::Map::setPause(bool pause)
   
   if (!pause)
     {
-      std::cout << _pausetime << "   time =" << _time << std::endl;
       interval = _time - _pausetime;
       for (int i = 0; i < _bombes.size(); i++)
 	{
@@ -370,7 +369,6 @@ void	bomber::Map::setPause(bool pause)
   else
     {
       _pausetime = _time;
-      std::cout << _pausetime << std::endl;
     }
 }
 
