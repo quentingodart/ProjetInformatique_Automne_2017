@@ -26,7 +26,7 @@ void	bomber::Core::clear()
   _device->drop();
 }
 
-void	bomber::Core::update(bool second)
+void	bomber::Core::update(bool second, bool Ia)
 {
   int	player;
   _map.setTime(_device->getTimer()->getTime());
@@ -47,6 +47,12 @@ void	bomber::Core::update(bool second)
 		  else
 		    img->setImage(_driver->getTexture("assets/texture/dead_screen_player2.png"));
 		}
+	      else if (Ia) {
+		if (player == 0)
+		  img->setImage(_driver->getTexture("assets/texture/dead_screen_player1.png"));
+		else
+		  img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
+	      }
 	      else
 		img->setImage(_driver->getTexture("assets/texture/dead_screen.png"));
 	      img->setScaleImage(true);
@@ -86,7 +92,7 @@ bool	bomber::Core::run(std::string const & mapFile, bool secondPlayer, bool IA)
   int y = 2100;
   while (_run && _device->run())
     {
-      update(secondPlayer);
+      update(secondPlayer, IA);
       // TODO: use animation
       if (y != 1000)
 	{

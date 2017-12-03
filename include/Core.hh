@@ -23,7 +23,7 @@ namespace	bomber
     void		init();
     void		clear();
     bool		run(std::string const &, bool = false, bool = false);
-    void		update(bool);
+    void		update(bool, bool);
     void		draw();
 
     bool		isKeyPressed(bool, irr::EKEY_CODE, irr::SEvent const &);
