@@ -90,7 +90,7 @@ namespace	bomber
       std::vector<t_expNodes>	_nExplosion;
       std::vector<Bombe *>	_bombes;
       std::vector<Player>	_player;
-
+      
       irr::video::IVideoDriver	*_driver;
       irr::scene::ISceneManager	*_smgr;
 

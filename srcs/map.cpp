@@ -403,6 +403,8 @@ void	bomber::Map::movePlayer(int player, bomber::e_direction dir)
 {
   bool		canMove = false;
   char		c = getInfoPosition(_player[player].getPos() + bomber::getMovVector(dir));
+
+  //std::cout << "Player n° "  << player << " direction : "  << dir  << std::endl;
   if (c == ' ' || c == 'B')
     canMove = true;
   _player[player].movePlayer(canMove, dir, getBase(), _time);
