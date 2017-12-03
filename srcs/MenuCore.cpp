@@ -106,6 +106,7 @@ void	bomber::MenuCore::Creat_Menu()
   _nMenu.push_back({btn, M_PLAY});
   btn = _guienv->addButton(core::rect<int>(280, 440, 520, 520), 0, 12);
   btn->setImage(_driver->getTexture("assets/texture/button/bouton_menu_ia.png"));
+  btn->setPressedImage(_driver->getTexture("assets/texture/button/bouton_menu_ia_focus.png"));
   _nMenu.push_back({btn, M_PLAY});
   btn = _guienv->addButton(core::rect<int>(720, 533, 780, 585), 0, 8);
   btn->setImage(_driver->getTexture("assets/texture/button/bouton_fleche_retour.png"));
