@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:52:20 2017 Anaïs Foncel
-// Last update Sun Dec  3 01:41:52 2017 Anaïs Foncel
+// Last update Mon Dec  4 01:34:43 2017 Anaïs Foncel
 //
 
 #ifndef PLAYER_HH_
@@ -55,7 +55,8 @@ namespace	bomber
     int					getBombs() const;
     int					getBombsUse() const;
     int					getRange() const;
-
+    int					getSpeed() const;
+    std::string				getName() const;
     int					getX() const;
     int					getY() const;
     bomber::v2d const			&getPos() const;

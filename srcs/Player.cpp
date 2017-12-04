@@ -5,7 +5,7 @@
 // Login   <foncel_a@epitech.net>
 // 
 // Started on  Sun Nov 12 07:50:47 2017 Anaïs Foncel
-// Last update Sun Dec  3 02:13:43 2017 Anaïs Foncel
+// Last update Mon Dec  4 01:35:14 2017 Anaïs Foncel
 //
 
 #include "Player.hh"
@@ -125,6 +125,16 @@ int	bomber::Player::getBombsUse() const
 int	bomber::Player::getRange() const
 {
   return _range;
+}
+
+int	bomber::Player::getSpeed() const
+{
+  return _speed;
+}
+
+std::string	bomber::Player::getName() const
+{
+  return _name;
 }
 
 int	bomber::Player::getX() const
