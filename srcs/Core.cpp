@@ -40,7 +40,7 @@ void	bomber::Core::update(bool second, bool Ia)
 	      son.Play_Sound("./sono/mort.ogg");
 	      _deadTime = _device->getTimer()->getTime();
 	      irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
-	      // _timer = _device->getTimer()->getTime();
+	      _timer = _device->getTimer()->getTime();
 	      if (second)
 		{
 		  if (player == 2)
@@ -62,8 +62,8 @@ void	bomber::Core::update(bool second, bool Ia)
 	}
       _map.checkExplosion();
       _map.checkBonus();
-      // if (_deadTime != 0 && _device->getTimer()->getTime() - _timer > 3000)
-      // _run = false;
+      if (_deadTime != 0 && _device->getTimer()->getTime() - _timer > 3000)
+      _run = false;
     }
 }
 
