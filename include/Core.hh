@@ -40,6 +40,7 @@ namespace	bomber
     irr::u32			_deadTime;
     
     Map			_map;
+    irr::u32		_timer;
 
   public:
   };
