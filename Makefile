@@ -20,7 +20,9 @@ SRCS		= main.cpp	\
 		  Core.cpp	\
 		  fileManager.cpp \
 		  IA.cpp	\
-		  Son.cpp
+		  Son.cpp	\
+		  GUIBonus.cpp	\
+		  HUD.cpp
 
 
 CXX		= g++

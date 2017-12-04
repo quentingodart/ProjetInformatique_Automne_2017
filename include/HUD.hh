@@ -14,6 +14,9 @@
 # include <irrlicht.h>
 # include <vector>
 # include "Player.hh"
+# include "GUIBonus.hh"
+
+# define SIZE_IMAGE	(40)
 
 using namespace irr;
 
@@ -23,18 +26,25 @@ private:
   IrrlichtDevice		*_device;
   video::IVideoDriver		*_driver;
 
-  std::vector<bomber::Player>		_players;
+  std::vector<bomber::Player>	_players;
+  GUIBonus			*_bonus;
 
   int				_size_windowX;
   int				_size_windowY;
   int				_size_HUD_X;
   int				_size_HUD_Y;
+  int				_size_HUD_Y_player;
 
 public:
-  HUD();
+  HUD(video::IVideoDriver * const driver, IrrlichtDevice * const device, std::vector<int> const &size);
   ~HUD();
 
-  void				display() const;
+  void				display();
+  void				displayName(bomber::Player const &player, int i);
+  void				displayBonus(bomber::Player const &player, int i);
+  void				displayBonusBomb(bomber::Player const &player, int i);
+  void				displayBonusRange(bomber::Player const &player, int i);
+  void				displayBonusSpeed(bomber::Player const &player, int i);
 };
 
 #endif /* HUD_HH__ */
