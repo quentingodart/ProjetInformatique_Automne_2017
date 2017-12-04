@@ -1,7 +1,7 @@
 #include "Core.hh"
 
 bomber::Core::Core()
-  : _device(0), _driver(0), _smgr(0), _run(false), _menu(false), _deadTime(0), _map()
+  : _device(0), _driver(0), _smgr(0), _run(false), _menu(false), _deadTime(0), _map(), _pause(false)
 
 {
   //  irr::video::EDT_OPENGL;
@@ -40,7 +40,7 @@ void	bomber::Core::update(bool second, bool Ia)
 	      son.Play_Sound("./sono/mort.ogg");
 	      _deadTime = _device->getTimer()->getTime();
 	      irr::gui::IGUIImage	*img = _smgr->getGUIEnvironment()->addImage(irr::core::rect<irr::s32>(0,0,1600,900));
-	      _timer = _device->getTimer()->getTime();
+	      // _timer = _device->getTimer()->getTime();
 	      if (second)
 		{
 		  if (player == 2)
@@ -62,8 +62,8 @@ void	bomber::Core::update(bool second, bool Ia)
 	}
       _map.checkExplosion();
       _map.checkBonus();
-      if (_deadTime != 0 && _device->getTimer()->getTime() - _timer > 3000)
-      _run = false;
+      // if (_deadTime != 0 && _device->getTimer()->getTime() - _timer > 3000)
+      // _run = false;
     }
 }
 
@@ -73,7 +73,9 @@ void	bomber::Core::draw()
     {
       _driver->beginScene(true, true, irr::video::SColor(255,20,20,24));
       if (!_deadTime && !_pause)
-	_smgr->drawAll();
+	{
+	  _smgr->drawAll();
+	}
       else
 	_device->getGUIEnvironment()->drawAll();
       _driver->endScene();
