@@ -5,7 +5,7 @@
 ## Login   <foncel_a@epitech.net>
 ## 
 ## Started on  Sun Nov 12 06:36:25 2017 Anaïs Foncel
-## Last update Sun Nov 12 10:08:43 2017 Anaïs Foncel
+## Last update Tue Dec  5 07:56:51 2017 Anaïs Foncel
 ##
 
 NAME		= bombertrash
@@ -79,7 +79,7 @@ $(OBJS_DIR_MAP)/%.o: $(SRCS_DIR_MAP)/%.cpp
 		@$(CXX) -c -o $@ $^ $(CPPFLAGS)
 		@echo "g++ -c -o $@ $^"
 
-$(NAME): $(OBJS_BIN)
+$(NAME): $(OBJS_BIN) $(NAME_MAP)
 	@$(CXX) $(OBJS_BIN) -o $(NAME) $(LDFLAGS)
 	@echo -e "g++ -o $(NAME)"
 	export LD_LIBRARY_PATH="./irrlicht/include"
@@ -88,7 +88,7 @@ $(NAME_MAP): $(OBJS_BIN_MAP)
 	@$(CXX) $(OBJS_BIN_MAP) -o $(NAME_MAP) $(LDFLAGS)
 	@echo -e "g++ -o $(NAME_MAP)"
 
-all: $(NAME) $(NAME_MAP)
+all: $(NAME)
 
 clean:
 	$(warning Cleaning ...)
