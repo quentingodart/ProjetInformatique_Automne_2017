@@ -8,7 +8,7 @@
 ## Last update Sun Nov 12 10:08:43 2017 Anaïs Foncel
 ##
 
-NAME		= bomberman
+NAME		= bombertrash
 
 SRCS		= main.cpp	\
 		  Errors.cpp	\
