@@ -206,6 +206,7 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
 	      _device->closeDevice();
 	      _start = true;
 	      _secondPlayer = false;
+	      _IA = false;
 	    }
 	  break;
           case 11:
@@ -214,6 +215,7 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
 	      _device->closeDevice();
 	      _start = true;
 	      _secondPlayer = true;
+	      _IA = false;
 	    }
       	  break;
 	case 12:
@@ -222,6 +224,7 @@ bool	bomber::MenuCore::OnEvent(irr::SEvent const & event)
 	      _device->closeDevice();
 	      _start = true;
 	      _IA = true;
+	      _secondPlayer = false;
 	    }
       	  break;
 
