@@ -8,8 +8,9 @@ using namespace io;
 using namespace gui;
 
 bomber::MenuCore::MenuCore()
-  : _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false), _sound_count(false)
-{}
+  : _device(0), _driver(0), _smgr(0), _guienv(0), _start(false), _secondPlayer(false), _sound_count(false), _IA(false)
+{
+}
 
 bomber::MenuCore::~MenuCore()
 {
