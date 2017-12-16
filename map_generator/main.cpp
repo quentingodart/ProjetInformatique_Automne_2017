@@ -43,14 +43,14 @@ char**		initMap()
   return map;
 }
 
-char		randomChar()
+char		randomChar(double diff)
 {
   double val = (double)rand() / RAND_MAX;
 
   char random;
-  if (val < 0.60)  //  60%
+  if (val < diff)
     random = 'c';
-  else  //  40%
+  else 
     random = ' ';
   return random;
 }
@@ -73,7 +73,7 @@ char**		deleteCharFromMap(char **map)
   return map;
 }
 
-char**		randomMap(char **map)
+char**		randomMap(char **map, double diff)
 {
   int		i = 1;
   int		j = 1;
@@ -81,7 +81,7 @@ char**		randomMap(char **map)
   while (i < 18) {
     while (j < 18) {
       if (map[i][j] != 'x' && map[i][j] != 'i') {
-	map[i][j] = randomChar();
+	map[i][j] = randomChar(diff);
       }
       j++;
     }
@@ -94,7 +94,7 @@ char**		randomMap(char **map)
 
 void		openFile(std::string mapname, char **map)
 {
-  ofstream	newMap(mapname.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
+  ofstream	newMap(mapname.c_str(), std::fstream::in | std::fstream::out | std::fstream::trunc);
   int		i = 0;
 
   newMap << "19-19\n";
@@ -120,20 +120,31 @@ int		main(int ac, char const *av[])
 {
   std::string	mapname;
   char		**map;
+  int		val = 0;
   
-  if (ac == 2)
+  if (ac == 2 || ac == 3)
     {
       srand(time(NULL));
       mapname = av[1];
+      if (ac == 3) {
+	val = atoi(av[2]);
+      }
       map = initMap();
-      map = randomMap(map);
+      switch (val) {
+      case 2: map = randomMap(map, 0.40);
+	break;
+      case 3: map = randomMap(map, 0.30);
+	break;
+      default: map = randomMap(map, 0.60);
+	break;
+      }
       openFile(mapname, map);
       //freeMap(map);
       return 0;
     }
   else
     {
-      cout << "USAGE : ./mapgenerator [MAPNAME]" << endl;
+      cout << "USAGE : ./mapgenerator [MAPNAME] [difficulty : 1 / 2 / 3]" << endl;
       return 1;
     }
 }
